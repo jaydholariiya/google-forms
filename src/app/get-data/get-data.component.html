@@ -1,0 +1,92 @@
+<!-- <div *ngFor="let data of data">
+  <ng-container *ngIf="data.selected === 'short-que'">
+    <h1>{{ data.id }}</h1>
+    <h1>{{ data.description }}</h1>
+    <h1>{{ data.selected }}</h1>
+  </ng-container>
+</div> -->
+
+<div *ngFor="let data of data">
+  <ng-container *ngIf="data.selected === 'checkbox'">
+    <!-- <div *ngFor="let data of data">
+  <ng-container *ngIf="data.selected === 'selector'">
+    <h1>{{ data.id }}</h1>
+    <h1>{{ data.description }}</h1>
+    <h1>{{ data.selected }}</h1>
+  </ng-container>
+</div>
+
+<div *ngFor="let data of data">
+  <ng-container *ngIf="data.selected === 'Date'">
+    <h1>{{ data.id }}</h1>
+    <h1>{{ data.description }}</h1>
+    <h1>{{ data.selected }}</h1>
+  </ng-container>
+</div> -->
+
+    <div
+      class="max-w-screen-md mx-auto mt-12 p-12 bg-white rounded shadow-md grid grid-cols-1 md:grid-cols-3 gap-6"
+    >
+      <!-- First Record -->
+      <div class="mb-4">
+        <h1 class="text-2xl font-bold text-gray-800">Description:</h1>
+        <p class="text-gray-600">{{ data.description }}</p>
+      </div>
+
+      <!-- Second Record -->
+      <div class="mb-4">
+        <h1 class="text-2xl font-bold text-gray-800">Type:</h1>
+        <p class="font-bold text-indigo-700">{{ data.selected }}</p>
+      </div>
+
+      <!-- Third Record -->
+      <div class="mb-4">
+        <h1 class="text-2xl font-bold text-gray-800">Checkbox Options:</h1>
+        <div class="mt-2 space-y-2">
+          <label class="flex items-center">
+            <input
+              type="checkbox"
+              class="form-checkbox h-5 w-5 text-indigo-600"
+            />
+            <span class="ml-2">{{ data.checkboxInput0 }}</span>
+          </label>
+          <label class="flex items-center">
+            <input
+              type="checkbox"
+              class="form-checkbox h-5 w-5 text-indigo-600"
+            />
+            <span class="ml-2">{{ data.checkboxInput1 }}</span>
+          </label>
+          <label class="flex items-center">
+            <input
+              type="checkbox"
+              class="form-checkbox h-5 w-5 text-indigo-600"
+            />
+            <span class="ml-2">{{ data.checkboxInput2 }}</span>
+          </label>
+          <label class="flex items-center">
+            <input
+              type="checkbox"
+              class="form-checkbox h-5 w-5 text-indigo-600"
+            />
+            <span class="ml-2">{{ data.checkboxInput3 }}</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Repeat the structure for additional records as needed -->
+
+      <!-- Fourth Record -->
+      <!-- <div class="mb-4">
+      ...
+    </div> -->
+
+      <!-- Fifth Record -->
+      <!-- <div class="mb-4">
+      ...
+    </div> -->
+
+      <!-- Continue adding records as needed -->
+    </div>
+  </ng-container>
+</div>
