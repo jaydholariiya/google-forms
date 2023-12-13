@@ -11,12 +11,20 @@ import {
   Validators,
 } from '@angular/forms';
 import { CrudAdd } from './action/datacrud.action';
+import { AddDataComponent } from './add-data/add-data.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FormsModule, ReactiveFormsModule , RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    AddDataComponent,
+  ],
 })
 export class AppComponent {}

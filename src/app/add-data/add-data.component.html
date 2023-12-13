@@ -12,7 +12,17 @@
         name="description"
         id="description"
         class="mt-2 p-2 border rounded w-full"
+        required
       />
+      <div
+        style="color: red"
+        *ngIf="
+          data.controls['description']?.invalid &&
+          (data.controls['description']?.touched || data.submitted)
+        "
+      >
+        Description is required!
+      </div>
     </div>
 
     <div class="mb-4">
@@ -27,6 +37,8 @@
         <option value="checkbox">checkbox</option>
         <option value="selector">selector</option>
         <option value="Date">Date</option>
+        <option value="File Upload">File Upload</option>
+        <option value="optional">optional</option>
       </select>
     </div>
 
@@ -38,18 +50,29 @@
         <span>Add Select Menu Content Here</span>
       </div>
       <div *ngFor="let input of checkboxInputs; let i = index">
-        <!-- <div *ngFor="let i of [0, 1, 2, 3]; let index = index"> -->
-        <input
-          type="text"
-          ngModel
-          name="selectorInput{{ i }}"
-          class="mt-2 p-2 border rounded w-full"
-          placeholder="enter the {{ i + 1 }} selector value"
-        />
+        <!--  -->
 
-        <div disabled id="disabled-checkbox"></div>
+        <div class="flex gap-3 items-center">
+          <input
+            type="text"
+            ngModel
+            name="selectorInput{{ i }}"
+            class="mt-2 p-2 border rounded w-full"
+            placeholder="enter the {{ i + 1 }} selector value"
+          />
+          <input
+            class="floex"
+            type="text"
+            ngModel
+            name="selectorInputData{{ i }}"
+            class="flex mt-2 p-2 border rounded w-full"
+            placeholder="enter the {{ i + 1 }} selector value"
+          />
+        </div>
       </div>
     </div>
+
+    <div disabled id="disabled-checkbox"></div>
 
     <div *ngIf="selected === 'checkbox'" class="mb-4">
       <div class="flex items-center">
@@ -60,32 +83,41 @@
       </div>
       <div *ngFor="let input of checkboxInputs; let i = index">
         <!-- <div *ngFor="let i of [0, 1, 2, 3]; let index = index"> -->
-        <input
-          type="text"
-          ngModel
-          name="checkboxInput{{ i }}"
-          class="mt-2 p-2 border rounded w-full"
-          placeholder="enter the {{ i + 1 }} checkbox value"
-        />
-
+        <div class="flex gap-3 items-center">
+          <input
+            type="text"
+            ngModel
+            name="checkboxInput{{ i }}"
+            class="mt-2 p-2 border rounded w-full"
+            placeholder="enter the {{ i + 1 }} checkbox value"
+          />
+          <input
+            type="text"
+            ngModel
+            name="ShortValue{{ i }}"
+            class="mt-2 p-2 border rounded w-full"
+            placeholder="enter the {{ i + 1 }} checkbox value"
+          />
+        </div>
         <div disabled id="disabled-checkbox"></div>
       </div>
     </div>
 
     <div *ngIf="selected === 'short-que'" class="mb-4">
       <textarea
-        name="short-que"
+        name="shortque"
         ngModel
         class="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
       ></textarea>
     </div>
 
-    <div *ngIf="selected === 'Date'" class="mb-4">
-      <h1>Date Format</h1>
-      <input type="date" name="date" ngModel />
-    </div>
+    <div *ngIf="selected === 'Date'" class="mb-4"></div>
 
+    <div *ngIf="selected === 'File Upload'" class="mb-4"></div>
+
+    <div *ngIf="selected === 'optional'" class="mb-4"></div>
     <button
+      [disabled]="data.invalid"
       type="submit"
       class="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
     >

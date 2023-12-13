@@ -12,6 +12,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideStore(reducers, { metaReducers }),
     provideHttpClient(),
+    provideAnimations(),
+    provideAnimations(),
+    provideAnimations(),
     provideAnimations()
 ],
 };

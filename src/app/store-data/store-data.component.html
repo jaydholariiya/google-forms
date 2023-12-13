@@ -1,0 +1,78 @@
+<div
+  class="container mx-auto p-8"
+  *ngFor="let data2 of mergedData; let i = index"
+>
+  <h1 class="text-3xl font-bold text-gray-800 mb-4">
+    Stored Answers : {{ i + 1 }}
+  </h1>
+  <div class="flex items-center md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="bg-white p-6 rounded-md shadow-md">
+      <h3 class="text-lg font-semibold mb-2">Short Question List</h3>
+      <p class="text-gray-800 mb-2">
+        {{ data2.answerData1 }}
+      </p>
+      <p class="text-gray-800 mb-2">
+        {{ data2.answerData2 }}
+      </p>
+      <p class="text-gray-800 mb-2">
+        {{ data2.answerData3 }}
+      </p>
+      <p class="text-gray-800 mb-2">
+        {{ data2.answerData4 }}
+      </p>
+      <p class="text-gray-800 mb-2">
+        {{ data2.answerData5 }}
+      </p>
+      <p class="text-gray-800 mb-2">
+        {{ data2.answerData6 }}
+      </p>
+      <p class="text-gray-800 mb-2">
+        {{ data2.answerData7 }}
+      </p>
+
+      <h3 class="text-lg font-semibold mb-2">Date Answer</h3>
+      <p class="text-gray-800 mb-2">
+        {{ data2.date1 }}
+        {{ data2.date2 }}
+        {{ data2.date3 }}
+        {{ data2.date4 }}
+        {{ data2.date5 }}
+        {{ data2.date6 }}
+        {{ data2.date7 }}
+        {{ data2.date8 }}
+        {{ data2.date9 }}
+        {{ data2.date10 }}
+        {{ data2.date11 }}
+        {{ data2.date12 }}
+      </p>
+
+      <h3 class="text-lg font-semibold mb-2">Radio Answer</h3>
+      <p class="text-gray-800 mb-2">
+        {{ data2.radio1 }}
+        {{ data2.radio2 }}
+        {{ data2.radio3 }}
+        {{ data2.radio4 }}
+        {{ data2.radio5 }}
+        {{ data2.radio6 }}
+        {{ data2.radio7 }}
+        {{ data2.radio8 }}
+        {{ data2.radio9 }}
+      </p>
+      <h3 class="text-lg font-semibold mb-2">Images</h3>
+      <img
+        src="{{ data2.file }}"
+        alt="not visibled"
+        height="200px"
+        width="200px"
+      />
+      <h3 class="text-lg font-semibold mb-2">CheckBox</h3>
+
+      <!-- Repeat this structure for each stored answer -->
+    </div>
+  </div>
+  @for (item of dataResult['checkbox8']; track $index){
+
+  <h3 class="text-lg font-semibold mb-2">CheckBox</h3>
+  <p>{{ item.value }}</p>
+  }
+</div>

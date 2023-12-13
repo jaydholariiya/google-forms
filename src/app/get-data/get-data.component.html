@@ -1,92 +1,295 @@
-<!-- <div *ngFor="let data of data">
-  <ng-container *ngIf="data.selected === 'short-que'">
-    <h1>{{ data.id }}</h1>
-    <h1>{{ data.description }}</h1>
-    <h1>{{ data.selected }}</h1>
-  </ng-container>
-</div> -->
+<form #dataGet="ngForm" (ngSubmit)="dataValueGet(dataGet.value)">
+  <div *ngFor="let data of data; let i = index">
+    <ng-container *ngIf="data.selected === 'short-que'">
+      <div
+        class="max-w-screen-md mx-auto mt-12 p-12 bg-white rounded shadow-md grid grid-cols-1 md:grid-cols-3 gap-6"
+      >
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Description:</h1>
+          <div name="descriptionData">
+            <p class="text-gray-600">{{ data.description }}{{ i }}</p>
+          </div>
+        </div>
 
-<div *ngFor="let data of data">
-  <ng-container *ngIf="data.selected === 'checkbox'">
-    <!-- <div *ngFor="let data of data">
-  <ng-container *ngIf="data.selected === 'selector'">
-    <h1>{{ data.id }}</h1>
-    <h1>{{ data.description }}</h1>
-    <h1>{{ data.selected }}</h1>
-  </ng-container>
-</div>
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Type:</h1>
+          <p class="font-bold text-indigo-700">{{ data.selected }}</p>
+        </div>
 
-<div *ngFor="let data of data">
-  <ng-container *ngIf="data.selected === 'Date'">
-    <h1>{{ data.id }}</h1>
-    <h1>{{ data.description }}</h1>
-    <h1>{{ data.selected }}</h1>
-  </ng-container>
-</div> -->
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Question:</h1>
+          <div class="font-bold text-indigo-700">
+            {{ data.shortque }}
+          </div>
+        </div>
 
-    <div
-      class="max-w-screen-md mx-auto mt-12 p-12 bg-white rounded shadow-md grid grid-cols-1 md:grid-cols-3 gap-6"
-    >
-      <!-- First Record -->
-      <div class="mb-4">
-        <h1 class="text-2xl font-bold text-gray-800">Description:</h1>
-        <p class="text-gray-600">{{ data.description }}</p>
-      </div>
-
-      <!-- Second Record -->
-      <div class="mb-4">
-        <h1 class="text-2xl font-bold text-gray-800">Type:</h1>
-        <p class="font-bold text-indigo-700">{{ data.selected }}</p>
-      </div>
-
-      <!-- Third Record -->
-      <div class="mb-4">
-        <h1 class="text-2xl font-bold text-gray-800">Checkbox Options:</h1>
-        <div class="mt-2 space-y-2">
-          <label class="flex items-center">
-            <input
-              type="checkbox"
-              class="form-checkbox h-5 w-5 text-indigo-600"
-            />
-            <span class="ml-2">{{ data.checkboxInput0 }}</span>
-          </label>
-          <label class="flex items-center">
-            <input
-              type="checkbox"
-              class="form-checkbox h-5 w-5 text-indigo-600"
-            />
-            <span class="ml-2">{{ data.checkboxInput1 }}</span>
-          </label>
-          <label class="flex items-center">
-            <input
-              type="checkbox"
-              class="form-checkbox h-5 w-5 text-indigo-600"
-            />
-            <span class="ml-2">{{ data.checkboxInput2 }}</span>
-          </label>
-          <label class="flex items-center">
-            <input
-              type="checkbox"
-              class="form-checkbox h-5 w-5 text-indigo-600"
-            />
-            <span class="ml-2">{{ data.checkboxInput3 }}</span>
-          </label>
+        <div class="mb-4">
+          <textarea
+            name="answerData{{ i }}"
+            placeholder="Give The Answer"
+            ngModel
+            class="mb-4 px-7 p-6 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+            #answerField="ngModel"
+          ></textarea>
         </div>
       </div>
+    </ng-container>
+  </div>
 
-      <!-- Repeat the structure for additional records as needed -->
+  <div *ngFor="let data of data; let i = index">
+    <ng-container *ngIf="data.selected === 'checkbox'">
+      <div
+        class="max-w-screen-md mx-auto mt-12 p-12 bg-white rounded shadow-md grid grid-cols-1 md:grid-cols-3 gap-6"
+      >
+        <!-- First Record -->
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Description:</h1>
+          <p class="text-gray-600">{{ data.description }}{{ i }}</p>
+        </div>
 
-      <!-- Fourth Record -->
-      <!-- <div class="mb-4">
-      ...
-    </div> -->
+        <!-- Second Record -->
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Type:</h1>
+          <p class="font-bold text-indigo-700">{{ data.selected }}</p>
+        </div>
 
-      <!-- Fifth Record -->
-      <!-- <div class="mb-4">
-      ...
-    </div> -->
+        <!-- Third Record -->
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Checkbox Options:</h1>
+          <div class="mt-2 space-y-2">
+            @for (checkBox of checkboxData; track $index) {
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                class="form-checkbox h-5 w-5 text-indigo-600"
+                ngModel
+                (click)="
+                  checkboxClickHandler(
+                    checkBox.id,
+                    $event.target,
+                    checkBox.value
+                  )
+                "
+                name="checkbox{{ data.id }}"
+                value="{{ checkBox.value }}"
+              />
+              <span class="ml-2">{{ checkBox.label }}</span>
+            </label>
+            }
 
-      <!-- Continue adding records as needed -->
-    </div>
-  </ng-container>
-</div>
+            <!-- <label class="flex items-center">
+              <input
+                type="checkbox"
+                class="form-checkbox h-5 w-5 text-indigo-600"
+                ngModel
+                name="checkbox{{ i }}"
+                value="{{ data.checkboxInput1 }}"
+              />
+              <span class="ml-2">{{ data.ShortValue1 }}</span>
+            </label>
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                class="form-checkbox h-5 w-5 text-indigo-600"
+                ngModel
+                name="checkbox{{ i }}"
+                value="{{ data.checkboxInput2 }}"
+              />
+              <span class="ml-2">{{ data.ShortValue2 }}</span>
+            </label>
+            <label class="flex items-center">
+              <input
+                type="checkbox"
+                class="form-checkbox h-5 w-5 text-indigo-600"
+                ngModel
+                name="checkbox{{ i }}"
+                value="{{ data.checkboxInput3 }}"
+              />
+              <span class="ml-2">{{ data.ShortValue3 }}</span>
+            </label> -->
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngFor="let data of data; let i = index">
+    <ng-container *ngIf="data.selected === 'Date'">
+      <div
+        class="max-w-screen-md mx-auto mt-12 p-12 bg-white rounded shadow-md grid grid-cols-1 md:grid-cols-3 gap-6"
+      >
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Description:</h1>
+          <p class="text-gray-600">{{ data.description }}{{ i }}</p>
+        </div>
+
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Type:</h1>
+          <p class="font-bold text-indigo-700">{{ data.selected }}</p>
+        </div>
+
+        <div class="mb-4">
+          <label>Enter The Date</label>
+          <input type="date" name="date{{ i }}" ngModel style="padding: 30px" />
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngFor="let data of data; let i = index">
+    <ng-container *ngIf="data.selected === 'selector'">
+      <div
+        class="max-w-screen-md mx-auto mt-12 p-12 bg-white rounded shadow-md grid grid-cols-1 md:grid-cols-3 gap-6"
+      >
+        <!-- First Record -->
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Description:</h1>
+          <p class="text-gray-600">{{ data.description }}{{ i }}</p>
+        </div>
+
+        <!-- Second Record -->
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Type:</h1>
+          <p class="font-bold text-indigo-700">{{ data.selected }}</p>
+        </div>
+
+        <!-- Third Record -->
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Selector Options:</h1>
+          <div class="mt-2 space-y-2">
+            <label class="flex items-center">
+              <input
+                type="radio"
+                ngModel
+                name="gender"
+                class="form-checkbox h-5 w-5 text-indigo-600"
+                value="{{ data.selectorInputData0 }}"
+              />
+              <span class="ml-2">{{ data.selectorInputData0 }}</span>
+            </label>
+            <label class="flex items-center">
+              <input
+                ngModel
+                type="radio"
+                name="gender"
+                class="form-checkbox h-5 w-5 text-indigo-600"
+                value="{{ data.selectorInputData1 }}"
+              />
+              <span class="ml-2">{{ data.selectorInputData1 }}</span>
+            </label>
+            <label class="flex items-center">
+              <input
+                ngModel
+                type="radio"
+                name="gender"
+                class="form-checkbox h-5 w-5 text-indigo-600"
+                value="{{ data.selectorInputData2 }}"
+              />
+              <span class="ml-2">{{ data.selectorInputData2 }}</span>
+            </label>
+            <label class="flex items-center">
+              <input
+                ngModel
+                type="radio"
+                name="gender"
+                class="form-checkbox h-5 w-5 text-indigo-600"
+                value="{{ data.selectorInputData3 }}"
+              />
+              <span class="ml-2">{{ data.selectorInputData3 }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngFor="let data of data; let i = index">
+    <ng-container *ngIf="data.selected === 'File Upload'">
+      <div
+        class="max-w-screen-md mx-auto mt-4 p-12 bg-white rounded shadow-md grid grid-cols-1 md:grid-cols-3 gap-2"
+      >
+        <div class="mb-1">
+          <h1 class="text-2xl font-bold text-gray-800">Description:</h1>
+          <div name="descriptionData">
+            <p class="text-gray-600">{{ data.description }}{{ i }}</p>
+          </div>
+        </div>
+
+        <div class="mb-1">
+          <h1 class="text-2xl font-bold text-gray-800">Type:</h1>
+          <p class="font-bold text-indigo-700">{{ data.selected }}</p>
+        </div>
+
+        <div class="">
+          <input
+            ngModel
+            (change)="handleImageUpload($event)"
+            name="file{{ i }}"
+            type="file"
+            class="px-2.5 pl-4 py-2 bg-gray-50 outline-slate-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+          />
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngFor="let data of data; let i = index">
+    <ng-container *ngIf="data.selected === 'optional'">
+      <div
+        class="max-w-screen-md mx-auto mt-12 p-12 bg-white rounded shadow-md grid grid-cols-1 md:grid-cols-3 gap-6"
+      >
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Description:</h1>
+          <p class="text-gray-600">{{ data.description }}{{ i }}</p>
+        </div>
+
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">Type:</h1>
+          <p class="font-bold text-indigo-700">{{ data.selected }}</p>
+        </div>
+
+        <div class="mb-4">
+          <h1 class="text-2xl font-bold text-gray-800">FirstName:</h1>
+          <input
+            type="text"
+            placeholder="enter the firstName"
+            style="padding: 30px; border: 2px solid black"
+            name="firstName{{ i }}"
+            ngModel
+          />
+        </div>
+        <div class="mb-4">
+          <h2>enter the last Name</h2>
+          <h3 style="color: red">Not a required</h3>
+          <input
+            type="checkbox"
+            #inpp
+            (click)="optionalCheckboxToggle($event.target, data.id)"
+            value="option{{ i }}"
+            placeholder="lastname entered not mandotary to input..."
+          />
+
+          @if(optionalDataBool[data.id]){
+          <input
+            type="text"
+            ngModel
+            name="lastName{{ i }}"
+            style="padding: 30px; border: 2px solid black"
+            placeholder="enter the last Name"
+          />
+          }
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="p-8 rounded shadow-md text-center">
+    <button
+      [disabled]="!dataGet.valid"
+      type="submit"
+      class="w-24 h-24 inline-flex items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-white text-xl font-medium transition-transform transform animated-button"
+    >
+      Submit
+    </button>
+  </div>
+</form>
